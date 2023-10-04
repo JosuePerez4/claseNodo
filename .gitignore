@@ -1,3 +1,5 @@
 /bin/
-*.project
-*.classpath
+#ignora el archivo de project
+.project
+#ignora la ruta d la clase
+.classpath
