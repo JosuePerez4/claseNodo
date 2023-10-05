@@ -23,14 +23,18 @@ public class DoubleCircularLinkedList<E> {
 
 	public void add(E element) {
 		// Consideramos el caso en el qué no haya cabeza
-		if (head == null) {
-			head = new Node<E>(element);
+		if (this.head == null) {
+			Node <E> x = new Node<E> (element);
+			x.setSiguiente(x);
+			x.setAnterior(x);
+			this.head = x;
 			size++;
+			return;
 		}
 		// Ahora el caso para buscar el nodo que no tiene un siguiente, y ahí agregar
 		// nuestro nuevo nodo
-		Node<E> actual = head;
-		while (actual.getSiguiente() != head) {
+		Node<E> actual = this.head;
+		while (actual.getSiguiente() != this.head) {
 			actual = actual.getSiguiente();
 		}
 		// Cuándo lo encontramos, agregamos y relacionamos el actual con el nuevo y el
@@ -39,9 +43,10 @@ public class DoubleCircularLinkedList<E> {
 		Node<E> nuevoNodo = new Node<E>(element);
 		actual.setSiguiente(nuevoNodo);
 		nuevoNodo.setAnterior(actual);
-		nuevoNodo.setSiguiente(head);
-		head.setAnterior(nuevoNodo);
+		nuevoNodo.setSiguiente(this.head);
+		this.head.setAnterior(nuevoNodo);
 		size++;
+		return;
 	}
 
 	public void remove(E element) {
@@ -149,12 +154,12 @@ public class DoubleCircularLinkedList<E> {
 				return null;
 			}
 		}
-		while(actual != null) {
-			if(actual.getDatos().equals(elementToFind)) {
-				Node <E> nodoARemover = actual.getSiguiente();
-				if(nodoARemover != null) {
+		while (actual != null) {
+			if (actual.getDatos().equals(elementToFind)) {
+				Node<E> nodoARemover = actual.getSiguiente();
+				if (nodoARemover != null) {
 					actual.setSiguiente(nodoARemover.getSiguiente());
-					if(nodoARemover.getSiguiente() != null) {
+					if (nodoARemover.getSiguiente() != null) {
 						nodoARemover.getSiguiente().setSiguiente(actual);
 					}
 					size--;
@@ -167,18 +172,78 @@ public class DoubleCircularLinkedList<E> {
 	}
 
 	public E removeBefore(E elementToFind) {
+		Node<E> actual = head;
+		if (actual != null && actual.getDatos().equals(elementToFind)) {
+			System.out.println("No existe un elemento antes de la cabeza el cual eliminar");
+		}
+
+		while (actual != null) {
+			if (actual.getDatos().equals(elementToFind)) {
+				Node<E> nodoARemover = actual.getAnterior();
+				if (nodoARemover != null) {
+					actual.setAnterior(nodoARemover.getAnterior());
+				}
+				nodoARemover.getAnterior().setSiguiente(actual);
+				size--;
+				return nodoARemover.getDatos();
+			}
+			actual = actual.getSiguiente();
+		}
 		return null;
 	}
 
 	public void updateNode(E newElement, E oldElement) {
 
+		Node<E> actual = head;
+		if (head != null && actual.getDatos().equals(oldElement)) {
+			head.setDatos(newElement);
+		}
+
+		while (actual != null) {
+			if (actual.getDatos().equals(oldElement)) {
+				actual.setDatos(newElement);
+				return;
+			}
+			actual = actual.getSiguiente();
+		}
 	}
 
 	public void printReverse() {
 
+		Node<E> actual = head;
+		while (actual != head) {
+			actual = actual.getSiguiente();
+		}
+
+		Node<E> anterior = actual;
+		while (anterior != head) {
+			if (anterior.getAnterior() != head) {
+				System.out.println("[" + anterior.getDatos() + "]" + " -> ");
+			} else {
+				System.out.println("[" + anterior.getDatos() + "]");
+			}
+			anterior = anterior.getAnterior();
+		}
+
 	}
 
 	public void printAll(int times) {
-
+		
+		StringBuffer sb = new StringBuffer("[");
+		
+		Node<E> actual = this.head;
+		for(int i=0;i<times;i++) {
+			sb.append(actual.getDatos());
+			actual = actual.getSiguiente();
+			if(i==times-1) {
+				sb.append("]");
+			}
+			if(actual != null && i < times-1) {
+				sb.append(", ");
+			}
+			
+		}
+		
+		System.out.println(sb.toString());
 	}
 }

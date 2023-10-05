@@ -15,8 +15,8 @@ public class Node <E>{
     private Node <E> siguiente;
     private Node <E> anterior;
     
-	public Node(E ele) {
-		datos = ele;
+	public Node(E datos) {
+		this.datos = datos;
 	}
 	
 	public E getDatos() {
