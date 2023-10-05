@@ -1,4 +1,6 @@
-package clasenodo;
+package DoubleLinkedList;
+
+import LinkedListPropia.Node;
 
 public class DoubleLinkedList {
 
@@ -34,7 +36,7 @@ public class DoubleLinkedList {
 
 	public void addAtPosition(int val, int pos) {
 		if (pos < 0) {
-			System.out.println("Posición inválida");
+			System.out.println("Posiciï¿½n invï¿½lida");
 		} else if (pos == 0) {
 			Node j = new Node();
 			j.setDatos(val);
@@ -62,5 +64,4 @@ public class DoubleLinkedList {
 			p = p.getSiguiente();
 		}
 	}
-
 }

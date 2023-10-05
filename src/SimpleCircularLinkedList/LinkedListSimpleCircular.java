@@ -1,5 +1,6 @@
-package clasenodo;
+package SimpleCircularLinkedList;
 
 public class LinkedListSimpleCircular {
-
+	
+	
 }
