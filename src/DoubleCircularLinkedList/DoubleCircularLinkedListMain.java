@@ -7,7 +7,12 @@ public class DoubleCircularLinkedListMain {
 		listaDoble.add(2);
 		listaDoble.add(345);
 		listaDoble.add(894);
-		listaDoble.printAll(5);
+		listaDoble.addAfter(345, 500);
+		listaDoble.addAfter(768, 450);
+		//listaDoble.remove(2);
+		listaDoble.print();
+		listaDoble.printReverse();
+		listaDoble.printAll(6);
 	}
 
 }

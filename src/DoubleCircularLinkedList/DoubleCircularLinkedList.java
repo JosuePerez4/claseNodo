@@ -24,7 +24,7 @@ public class DoubleCircularLinkedList<E> {
 	public void add(E element) {
 		// Consideramos el caso en el qué no haya cabeza
 		if (this.head == null) {
-			Node <E> x = new Node<E> (element);
+			Node<E> x = new Node<E>(element);
 			x.setSiguiente(x);
 			x.setAnterior(x);
 			this.head = x;
@@ -50,21 +50,16 @@ public class DoubleCircularLinkedList<E> {
 	}
 
 	public void remove(E element) {
-		// Debemos considerar todos los casos
-		// 1) Si el elemento a borrar está en la cabeza
-		// 2) Si el elemento a borrar está en la mitad
-		// 3) Si el elemento a borrar está en la cola
-
-		// -------------------------------------------
-
 		// 1) Si el elemento a borrar está en la cabeza
 		if (head != null && head.getDatos().equals(element)) {
 			if (size == 1) {
 				head = null;
 			} else {
-				Node<E> nuevaCabeza = new Node<E>(element);
-				nuevaCabeza.setAnterior(null);
-				head = nuevaCabeza;
+				Node<E> anterior = head.getAnterior();
+				Node<E> siguiente = head.getSiguiente();
+				anterior.setSiguiente(siguiente);
+				siguiente.setAnterior(anterior);
+				head = head.getSiguiente();
 			}
 			size--;
 			return;
@@ -116,18 +111,20 @@ public class DoubleCircularLinkedList<E> {
 	}
 
 	public void addAfter(E elementToFind, E elementToAdd) {
-		Node<E> actual = head;
 		// caso de que se desee agregar después de la cabeza
-		if (actual != null && actual.getDatos().equals(elementToFind)) {
-			Node<E> nuevoNodo = new Node<E>(elementToAdd);
-			nuevoNodo.setAnterior(actual);
-			nuevoNodo.setSiguiente(actual.getSiguiente());
-			actual.setSiguiente(nuevoNodo);
-			size++;
-			return;
+		if (head != null) {
+			if (head.getDatos().equals(elementToFind)) {
+				Node<E> nuevoNodo = new Node<E>(elementToAdd);
+				nuevoNodo.setSiguiente(head.getSiguiente());
+				nuevoNodo.setAnterior(head);
+				head.setSiguiente(nuevoNodo);
+				size++;
+				return;
+			}
 		}
-
-		while (actual != null) {
+		
+		Node<E> actual = head;
+		while (actual.getSiguiente() != head && actual != null) {
 			if (actual.getDatos().equals(elementToFind)) {
 				Node<E> nuevoNodo = new Node<E>(elementToAdd);
 				nuevoNodo.setAnterior(actual);
@@ -136,7 +133,9 @@ public class DoubleCircularLinkedList<E> {
 				size++;
 				return;
 			}
+			actual = actual.getSiguiente();
 		}
+		System.out.println("El elemento a buscar no está en la lista");
 	}
 
 	public E removeAfter(E elementToFind) {
@@ -208,42 +207,56 @@ public class DoubleCircularLinkedList<E> {
 		}
 	}
 
-	public void printReverse() {
-
+	public void print() {
+		if (head == null) {
+			System.out.println("Lista vacía");
+			return;
+		}
 		Node<E> actual = head;
-		while (actual != head) {
+		while (actual.getSiguiente() != head) {
+			System.out.print("[" + actual.getDatos() + "]" + "->");
 			actual = actual.getSiguiente();
 		}
+		System.out.println("[" + actual.getDatos() + "]");
+	}
 
-		Node<E> anterior = actual;
-		while (anterior != head) {
-			if (anterior.getAnterior() != head) {
-				System.out.println("[" + anterior.getDatos() + "]" + " -> ");
-			} else {
-				System.out.println("[" + anterior.getDatos() + "]");
-			}
-			anterior = anterior.getAnterior();
+	public void printReverse() {
+		if (head == null) {
+			System.out.println("Lista vacía");
+			return;
 		}
 
+		Node<E> actual = head.getAnterior();
+		while (actual != head) {
+			System.out.print("[" + actual.getDatos() + "]" + "->");
+			actual = actual.getAnterior();
+		}
+
+		System.out.println("[" + actual.getDatos() + "]");
 	}
 
 	public void printAll(int times) {
-		
+
+		if (head == null) {
+			System.out.println("Lista vacía");
+			return;
+		}
+
 		StringBuffer sb = new StringBuffer("[");
-		
+
 		Node<E> actual = this.head;
-		for(int i=0;i<times;i++) {
+		for (int i = 0; i < times; i++) {
 			sb.append(actual.getDatos());
 			actual = actual.getSiguiente();
-			if(i==times-1) {
+			if (i == times - 1) {
 				sb.append("]");
 			}
-			if(actual != null && i < times-1) {
+			if (actual != null && i < times - 1) {
 				sb.append(", ");
 			}
-			
+
 		}
-		
+
 		System.out.println(sb.toString());
 	}
 }
