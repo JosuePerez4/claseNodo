@@ -48,43 +48,7 @@ public class DoubleCircularLinkedList<E> {
 		size++;
 		return;
 	}
-
-	public void remove(E element) {
-		// 1) Si el elemento a borrar está en la cabeza
-		if (head != null && head.getDatos().equals(element)) {
-			if (size == 1) {
-				head = null;
-			} else {
-				Node<E> anterior = head.getAnterior();
-				Node<E> siguiente = head.getSiguiente();
-				anterior.setSiguiente(siguiente);
-				siguiente.setAnterior(anterior);
-				head = head.getSiguiente();
-			}
-			size--;
-			return;
-		}
-
-		// -------------------------------------------
-
-		// 2) Si el elemento a borrar está en la mitad o al final de la cola
-
-		Node<E> actual = head;
-		while (actual != null) {
-			if (actual.getDatos().equals(element)) {
-				Node<E> anterior = actual.getAnterior();
-				Node<E> siguiente = actual.getSiguiente();
-
-				anterior.setSiguiente(siguiente);
-				siguiente.setAnterior(anterior);
-
-				size--;
-				return;
-			}
-			actual = actual.getSiguiente();
-		}
-	}
-
+	
 	public void addBefore(E elementToFind, E elementToAdd) {
 		Node<E> actual = head;
 		if (actual != null && actual.getDatos().equals(elementToFind)) {
@@ -136,6 +100,42 @@ public class DoubleCircularLinkedList<E> {
 			actual = actual.getSiguiente();
 		}
 		System.out.println("El elemento a buscar no está en la lista");
+	}
+
+	public void remove(E element) {
+		// 1) Si el elemento a borrar está en la cabeza
+		if (head != null && head.getDatos().equals(element)) {
+			if (size == 1) {
+				head = null;
+			} else {
+				Node<E> anterior = head.getAnterior();
+				Node<E> siguiente = head.getSiguiente();
+				anterior.setSiguiente(siguiente);
+				siguiente.setAnterior(anterior);
+				head = head.getSiguiente();
+			}
+			size--;
+			return;
+		}
+
+		// -------------------------------------------
+
+		// 2) Si el elemento a borrar está en la mitad o al final de la cola
+
+		Node<E> actual = head;
+		while (actual != null) {
+			if (actual.getDatos().equals(element)) {
+				Node<E> anterior = actual.getAnterior();
+				Node<E> siguiente = actual.getSiguiente();
+
+				anterior.setSiguiente(siguiente);
+				siguiente.setAnterior(anterior);
+
+				size--;
+				return;
+			}
+			actual = actual.getSiguiente();
+		}
 	}
 
 	public E removeAfter(E elementToFind) {
