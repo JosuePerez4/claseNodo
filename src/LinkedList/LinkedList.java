@@ -40,9 +40,12 @@ public class LinkedList<E> {
 			size++;
 		}
 	}
-	
-	public void addFirst () {
-		
+
+	public void addFirst(E element) {
+		Node<E> nuevoNodo = new Node<E>(element);
+		nuevoNodo.setSiguiente(head);
+		head = nuevoNodo;
+		size++;
 	}
 
 	public void addAtPosition(int val, int pos) {
@@ -63,6 +66,20 @@ public class LinkedList<E> {
 	public void deleteByValue(int valNodo) {
 	}
 
+	public E removeFirst() {
+		if (head.getSiguiente() == null) {
+			E data = head.getDatos();
+			head = null;
+			size--;
+			return data;
+		} else {
+			E data = head.getDatos();
+			head = head.getSiguiente();
+			size--;
+			return data;
+		}
+	}
+
 	// Implementaciones para resolver parcial semestre anterior
 	public E removeLast() {
 		if (head == null) {
@@ -80,18 +97,24 @@ public class LinkedList<E> {
 		if (nodoFinal == head) {
 			E data = head.getDatos();
 			head = null;
+			size--;
 			return data;
 		} else {
 			E data = nodoFinal.getDatos();
 			anterior.setSiguiente(null);
+			size--;
 			return data;
 		}
 	}
-	
+
+	public E getFirstElement() {
+		return head.getDatos();
+	}
+
 	// Implementaciones para resolver parcial semestre anterior
-	public E lastElement () {
-		Node <E> nodoFinal = head;
-		while(nodoFinal.getSiguiente() != null) {
+	public E getLastElement() {
+		Node<E> nodoFinal = head;
+		while (nodoFinal.getSiguiente() != null) {
 			nodoFinal = nodoFinal.getSiguiente();
 		}
 		return nodoFinal.getDatos();
@@ -110,5 +133,23 @@ public class LinkedList<E> {
 			actual = actual.getSiguiente();
 		}
 		System.out.println("[" + actual.getDatos() + "]");
+	}
+
+	public void printReverse() {
+		printReverseRecursive(head);
+	}
+
+	private void printReverseRecursive(Node<E> node) {
+		if (node == null) {
+	        return;
+	    }
+	    
+	    System.out.print("[" + node.getDatos() + "]");
+	    
+	    if (node.getSiguiente() != null) {
+	        System.out.print("->"); 
+	    }
+	    
+	    printReverseRecursive(node.getSiguiente());
 	}
 }

@@ -15,18 +15,18 @@ public class MineStack<E> {
 	}
 
 	public void push(E data) {
-		lista.add(data);
+		lista.addFirst(data);
 	}
 	
 	public E pop () {
-		return lista.removeLast();
+		return lista.removeFirst();
 	}
 	
 	public E peek () {
-		return lista.lastElement();
+		return lista.getFirstElement();
 	}
 	
 	public void printStack () {
-		lista.print();
+		lista.printReverse();
 	}
 }

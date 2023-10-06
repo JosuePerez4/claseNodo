@@ -11,6 +11,7 @@ public class Cliente {
 		Stack1.push(4);
 		Stack1.push(5);
 		Stack1.printStack();
+		System.out.println();
 		Stack1.pop();
 		System.out.println(Stack1.peek());
 		Stack1.printStack();
