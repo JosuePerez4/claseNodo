@@ -1,4 +1,4 @@
-package primerPrevioPilasImplementacion;
+package previo1SemPasado;
 
 import LinkedList.LinkedList;
 
@@ -27,6 +27,6 @@ public class MineStack<E> {
 	}
 	
 	public void printStack () {
-		lista.printReverse();
+		lista.print();
 	}
 }

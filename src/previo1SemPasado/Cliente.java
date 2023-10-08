@@ -1,4 +1,4 @@
-package primerPrevioPilasImplementacion;
+package previo1SemPasado;
 
 public class Cliente {
 

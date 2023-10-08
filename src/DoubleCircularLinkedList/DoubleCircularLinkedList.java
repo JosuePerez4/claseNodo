@@ -4,6 +4,12 @@ public class DoubleCircularLinkedList<E> {
 
 	private Node<E> head;
 	private int size = 0;
+	
+
+	public DoubleCircularLinkedList() {
+		this.head = null;
+		this.size = 0;
+	}
 
 	public Node<E> getHead() {
 		return head;

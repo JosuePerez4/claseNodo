@@ -26,19 +26,20 @@ public class LinkedList<E> {
 	}
 
 	public void add(E element) {
-		if (head == null) {
-			Node<E> nuevoNodo = new Node<E>(element);
-			head = nuevoNodo;
-			size++;
-		} else {
-			Node<E> actual = head;
-			while (actual.getSiguiente() != null) {
-				actual = actual.getSiguiente();
-			}
-			Node<E> nuevoNodo = new Node<E>(element);
-			actual.setSiguiente(nuevoNodo);
-			size++;
-		}
+	    Node<E> nuevoNodo = new Node<E>(element);
+	    if (head == null) {
+	        // Si la lista está vacía, el nuevo nodo se convierte en la cabeza
+	        head = nuevoNodo;
+	    } else {
+	        // Si la lista no está vacía, buscamos el último nodo y lo conectamos al nuevo nodo
+	        Node<E> actual = head;
+	        while (actual.getSiguiente() != null) {
+	            actual = actual.getSiguiente();
+	        }
+	        actual.setSiguiente(nuevoNodo);
+	    }
+
+	    size++;
 	}
 
 	public void addFirst(E element) {
@@ -132,7 +133,7 @@ public class LinkedList<E> {
 			System.out.print("[" + actual.getDatos() + "]" + "->");
 			actual = actual.getSiguiente();
 		}
-		System.out.println("[" + actual.getDatos() + "]");
+		System.out.print("[" + actual.getDatos() + "]");
 	}
 
 	public void printReverse() {

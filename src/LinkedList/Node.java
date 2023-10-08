@@ -9,8 +9,8 @@ public class Node <E> {
     private E datos;
     private Node <E> siguiente;
     
-    public Node (E ele) {
-    	datos = ele;
+    public Node (E datos) {
+    	this.datos = datos;
     }
 
 	public E getDatos() {

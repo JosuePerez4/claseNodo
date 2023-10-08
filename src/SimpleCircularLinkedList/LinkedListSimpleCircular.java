@@ -1,5 +1,7 @@
 package SimpleCircularLinkedList;
 
+import DoubleCircularLinkedList.Node;
+
 public class LinkedListSimpleCircular <E> {
 	
 	private Node <E> head;
@@ -32,6 +34,42 @@ public class LinkedListSimpleCircular <E> {
 			actual.setSiguiente(nuevoNodo);
 			nuevoNodo.setSiguiente(head);
 			size++;
+		}
+	}
+	
+	public void remove (E element) {
+		// 1) Si el elemento a borrar está en la cabeza
+		if (head != null && head.getDatos().equals(element)) {
+			if (size == 1) {
+				head = null;
+			} else {
+				Node<E> anterior = head.getAnterior();
+				Node<E> siguiente = head.getSiguiente();
+				anterior.setSiguiente(siguiente);
+				siguiente.setAnterior(anterior);
+				head = head.getSiguiente();
+			}
+			size--;
+			return;
+		}
+
+		// -------------------------------------------
+
+		// 2) Si el elemento a borrar está en la mitad o al final de la cola
+
+		Node<E> actual = head;
+		while (actual != null) {
+			if (actual.getDatos().equals(element)) {
+				Node<E> anterior = actual.getAnterior();
+				Node<E> siguiente = actual.getSiguiente();
+
+				anterior.setSiguiente(siguiente);
+				siguiente.setAnterior(anterior);
+
+				size--;
+				return;
+			}
+			actual = actual.getSiguiente();
 		}
 	}
 	
