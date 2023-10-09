@@ -196,6 +196,38 @@ public class DoubleCircularLinkedList<E> {
 		}
 		return null;
 	}
+	
+	public void removeByPosition (int index) {
+		if(head == null && index < 0 || size < index) {
+			System.out.println("Lista vacía o posición equivocada");
+			return;
+		}
+		
+		Node<E> actual = head;
+	    Node<E> anterior = null;
+	    int contador = 0;
+
+	    // Encuentra el nodo en la posición index
+	    while (contador < index) {
+	        contador++;
+	        anterior = actual;
+	        actual = actual.getSiguiente();
+	    }
+
+	    // Verifica si se elimina el primer nodo
+	    if (anterior == null) {
+	        head = actual.getSiguiente();
+	        if (head != null) {
+	            head.setAnterior(null); // Actualiza la referencia del nodo siguiente a null
+	        }
+	    } else {
+	        anterior.setSiguiente(actual.getSiguiente());
+	        if (actual.getSiguiente() != null) {
+	            actual.getSiguiente().setAnterior(anterior); // Actualiza la referencia del nodo siguiente
+	        }
+	    }
+	    size--;
+	}
 
 	public void updateNode(E newElement, E oldElement) {
 
@@ -211,6 +243,22 @@ public class DoubleCircularLinkedList<E> {
 			}
 			actual = actual.getSiguiente();
 		}
+	}
+	
+	public E get(int position) {
+	    if (head == null || position < 0 || position >= size) {
+	        return null; // La lista está vacía o la posición está fuera de rango.
+	    }
+
+	    Node<E> current = head;
+	    int index = 0;
+
+	    while (index < position) {
+	        current = current.getSiguiente();
+	        index++;
+	    }
+
+	    return current.getDatos();
 	}
 
 	public void print() {

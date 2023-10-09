@@ -10,10 +10,8 @@ public class LinkedListMain {
 		l.add(4);
 		System.out.println("primera impresión d la pila");
 		l.print();
-		l.removeLast();
-		l.removeLast();
-		l.removeLast();
-		l.removeLast();
+		l.removeByPosition(3);
+		System.out.println();
 		System.out.println("segunda impresión d la pila");
 		l.print();
 	}

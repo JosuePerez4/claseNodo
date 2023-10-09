@@ -107,6 +107,43 @@ public class LinkedList<E> {
 			return data;
 		}
 	}
+	
+	public void removeByPosition (int index) {
+		if(head == null && index < 0 || size < index) {
+			System.out.println("Lista vacía o posición equivocada");
+			return;
+		}
+		
+		Node <E> actual = head;
+		Node <E> anterior = null;
+		int contador = 0;
+		while(contador < index && actual.getSiguiente() != null) {
+			contador++;
+			anterior = actual;
+			actual = actual.getSiguiente();
+		}
+		if(contador == index) {
+			anterior.setSiguiente(actual.getSiguiente());
+		} else {
+			head = actual.getSiguiente();
+		}
+		size--;
+	}
+	
+	public E get(int position) {
+	    if (head == null || position < 0 || position >= size) {
+	        return null; // La lista está vacía o la posición está fuera de rango.
+	    }
+
+	    Node<E> current = head;
+	    int index = 0;
+
+	    while (index < position) {
+	        current = current.getSiguiente();
+	        index++;
+	    }
+	    return current.getDatos();
+	}
 
 	public E getFirstElement() {
 		return head.getDatos();
