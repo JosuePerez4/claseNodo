@@ -26,6 +26,10 @@ public class DoubleCircularLinkedList<E> {
 	public void setSize(int size) {
 		this.size = size;
 	}
+	
+	public E getFirstElement() {
+		return head.getDatos();
+	}
 
 	public void add(E element) {
 		// Consideramos el caso en el qué no haya cabeza
@@ -268,7 +272,7 @@ public class DoubleCircularLinkedList<E> {
 		}
 		Node<E> actual = head;
 		while (actual.getSiguiente() != head) {
-			System.out.print("[" + actual.getDatos() + "]" + "->");
+			System.out.print("[" + actual.getDatos() + "]" + "->\n");
 			actual = actual.getSiguiente();
 		}
 		System.out.println("[" + actual.getDatos() + "]");

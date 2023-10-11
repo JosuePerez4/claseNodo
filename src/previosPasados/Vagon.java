@@ -5,12 +5,12 @@ public class Vagon {
 	private String id;
 	// Si está disponible, significa que no está conectado al carrusel
 	private boolean disponible;
-	private int nivelDesgaste;
+	private int nivelDesgasteMaximo;
 	
-	public Vagon(String id) {
+	public Vagon(String id, boolean disponible) {
 		this.id = id;
-		this.disponible = true;
-		this.nivelDesgaste = 3000;
+		this.disponible = disponible;
+		this.nivelDesgasteMaximo = 3000;
 	}
 	
 	public String getId() {
@@ -27,19 +27,25 @@ public class Vagon {
 	}
 	
 	public int getNivelDesgaste() {
-		return nivelDesgaste;
+		return nivelDesgasteMaximo;
 	}
 
 	public void setNivelDesgaste(int nivelDesgaste) {
-		this.nivelDesgaste = nivelDesgaste;
+		this.nivelDesgasteMaximo = nivelDesgaste;
 	}
-	
-	public void actualizarNivelDesgaste (int desgaste) {
-		this.nivelDesgaste -= desgaste;
-		if(this.nivelDesgaste <= 0) {
+
+	// Implementaciones
+	/*public void actualizarNivelDesgaste (int desgaste) {
+		this.nivelDesgasteMaximo -= desgaste;
+		if(nivelDesgasteMaximo <= 0) {
 			setDisponible(true);
-			this.nivelDesgaste = 3000;
+			this.nivelDesgasteMaximo = 3000;
 		}
+	}*/
+	
+	@Override
+	public String toString () {
+		return "Id: " + getId() + " Disponibilidad: " + isDisponible() + " Nivel de desgaste: " + getNivelDesgaste();
 	}
 
 	@Override

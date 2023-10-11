@@ -108,6 +108,36 @@ public class LinkedList<E> {
 		}
 	}
 	
+	public E removeByPositionValue (int index) {
+		if (head == null || index < 0 || index >= size) {
+	        System.out.println("Lista vacía o posición equivocada");
+	        return null;
+	    }
+
+	    Node<E> actual = head;
+	    Node<E> anterior = null;
+	    int contador = 0;
+
+	    while (contador < index && actual != null) {
+	        contador++;
+	        anterior = actual;
+	        actual = actual.getSiguiente();
+	    }
+
+	    if (contador == index) {
+	        if (anterior != null) {
+	            anterior.setSiguiente(actual.getSiguiente());
+	        } else {
+	            head = actual.getSiguiente();
+	        }
+	        size--;
+	        return actual.getDatos();
+	    } else {
+	        System.out.println("No se encontró el elemento en la posición especificada");
+	        return null;
+	    }
+	}
+	
 	public void removeByPosition (int index) {
 		if(head == null && index < 0 || size < index) {
 			System.out.println("Lista vacía o posición equivocada");
@@ -167,7 +197,7 @@ public class LinkedList<E> {
 
 		Node<E> actual = this.head;
 		while (actual.getSiguiente() != null) {
-			System.out.print("[" + actual.getDatos() + "]" + "->");
+			System.out.print("[" + actual.getDatos() + "]" + "-> \n");
 			actual = actual.getSiguiente();
 		}
 		System.out.print("[" + actual.getDatos() + "]");
