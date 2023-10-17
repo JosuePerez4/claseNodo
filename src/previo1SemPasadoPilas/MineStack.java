@@ -1,4 +1,4 @@
-package previo1SemPasado;
+package previo1SemPasadoPilas;
 
 import LinkedList.LinkedList;
 

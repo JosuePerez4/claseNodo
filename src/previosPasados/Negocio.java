@@ -11,7 +11,9 @@ public class Negocio {
 		}
 		
 		System.out.println("Abriendo el parque y encendiendo el carrusel...");
-		carrusel.encenderCarrusel(5);
+		System.out.println("Inicimos a dar las vueltas");
+		int vueltas=5;
+		carrusel.encenderCarrusel(vueltas);
 		System.out.println("Cerrando el parque...");
 		carrusel.cerrarParque();
 		carrusel.imprimirFinalDia();
