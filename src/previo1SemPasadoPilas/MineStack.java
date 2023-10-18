@@ -5,6 +5,10 @@ import LinkedList.LinkedList;
 public class MineStack<E> {
 
 	private LinkedList<E> lista = new LinkedList<>();
+	
+	public MineStack () {
+		this.lista = new LinkedList<>();
+	}
 
 	public LinkedList<E> getLista() {
 		return lista;
@@ -24,6 +28,10 @@ public class MineStack<E> {
 	
 	public E peek () {
 		return lista.getFirstElement();
+	}
+	
+	public boolean isEmpty () {
+		return lista.getFirstElement() == null;
 	}
 	
 	public void printStack () {

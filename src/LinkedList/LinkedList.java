@@ -176,7 +176,11 @@ public class LinkedList<E> {
 	}
 
 	public E getFirstElement() {
-		return head.getDatos();
+		if(head != null) {
+			return head.getDatos();
+		} else {
+			return null;
+		}
 	}
 
 	// Implementaciones para resolver parcial semestre anterior
@@ -186,6 +190,10 @@ public class LinkedList<E> {
 			nodoFinal = nodoFinal.getSiguiente();
 		}
 		return nodoFinal.getDatos();
+	}
+	
+	public boolean isEmpty () {
+		return head == null;
 	}
 
 	public void print() {
