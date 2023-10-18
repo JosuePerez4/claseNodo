@@ -1,4 +1,4 @@
-package previo1SemPasadoPilas;
+package pilas;
 
 import LinkedList.LinkedList;
 
@@ -28,6 +28,9 @@ public class MineStack<E> {
 	
 	public E peek () {
 		return lista.getFirstElement();
+	}
+	
+	public void limpiarPila () {
 	}
 	
 	public boolean isEmpty () {

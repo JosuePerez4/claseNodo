@@ -192,6 +192,10 @@ public class LinkedList<E> {
 		return nodoFinal.getDatos();
 	}
 	
+	public void limpiar () {
+		head.setDatos(null);
+	}
+	
 	public boolean isEmpty () {
 		return head == null;
 	}

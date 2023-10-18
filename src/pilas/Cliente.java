@@ -1,4 +1,4 @@
-package previo1SemPasadoPilas;
+package pilas;
 
 public class Cliente {
 

@@ -1,4 +1,4 @@
-package validarExpresiones;
+package convertirExpresionAPostfija;
 
 public class TestConvertirExpresiones {
 
@@ -6,10 +6,12 @@ public class TestConvertirExpresiones {
 		// TODO Auto-generated method stub
 		
 		ConvertirExpresiones <Character> convertidor = new ConvertirExpresiones<Character>();
-		String expresion = "a*(b+c-(d/e^f)-g)-h";
+		EvaluadorPostFija evaluador = new EvaluadorPostFija();
+		String expresion = "7*3*2";
 		System.out.println("La expresión postfija de la expresión "+ expresion + " es: " + convertidor.convertirAPostfija(expresion));
-		expresion = "A+(X/Y)*B^C";
-		System.out.println("La expresión postfija de la expresión "+ expresion + " es: " + convertidor.convertirAPostfija(expresion));
+		String postFija = convertidor.convertirAPostfija(expresion);
+		System.out.println("Y su solución es: " + evaluador.resolverPostfija(postFija));
+
 	}
 
 }

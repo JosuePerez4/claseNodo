@@ -1,6 +1,6 @@
 package evaluadorParentesis;
 
-import previo1SemPasadoPilas.MineStack;
+import pilas.MineStack;
 
 public class evaluadorParentesis<E> {
 
