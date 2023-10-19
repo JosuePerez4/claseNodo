@@ -1,6 +1,7 @@
 package LinkedList;
 
 public class LinkedList<E> {
+	
 	private Node<E> head;
 	private int size;
 
@@ -38,18 +39,40 @@ public class LinkedList<E> {
 	        }
 	        actual.setSiguiente(nuevoNodo);
 	    }
-
-	    size++;
+	    this.size++;
 	}
-
+	
+	// Añade en la posicicón indicada
+	public void add(E element, int pos) {
+		if (pos < 0) {
+        } else if (pos == 0) {
+            Node <E> j = new Node <E> (element);
+            head = j;
+            size++;
+        } else {
+            Node <E> p = head;
+            int pContador = 0;
+            while (p.getSiguiente() != null && pContador < pos - 1) {
+                pContador++;
+                p = p.getSiguiente();
+            }
+            if (pContador == pos - 1) {
+                Node <E> n = new Node<E>(element);
+                if(p.getSiguiente() != null) {
+                	n.setSiguiente(p.getSiguiente());
+                }
+                p.setSiguiente(n);
+                size++;
+            }
+        }
+	}
+	
+	// Añade al inicio de la lista
 	public void addFirst(E element) {
 		Node<E> nuevoNodo = new Node<E>(element);
 		nuevoNodo.setSiguiente(head);
 		head = nuevoNodo;
 		size++;
-	}
-
-	public void addAtPosition(int val, int pos) {
 	}
 
 	public void addBeforeByValue(int val, int valNodo) {
@@ -64,7 +87,17 @@ public class LinkedList<E> {
 	public void addAfterByPosition(int val, int nodoBuscado) {
 	}
 
-	public void deleteByValue(int valNodo) {
+	public void removeByValue(int valNodo) {
+	}
+	
+	// Añadir nodo 2 posiciones después de la indicada
+	public void addDespuesDeDos (E element, int pos) {
+		if(pos < 0) {
+		} else if (pos == 0 && head != null && head.getSiguiente() != null && head.getSiguiente().getSiguiente() != null) {
+				Node <E> x = new Node <E> (element);
+				x.setSiguiente(head.getSiguiente().getSiguiente().getSiguiente());
+				head.getSiguiente().getSiguiente().setSiguiente(x);
+		}
 	}
 
 	public E removeFirst() {
@@ -193,7 +226,7 @@ public class LinkedList<E> {
 	}
 	
 	public void limpiar () {
-		head.setDatos(null);
+		head = null;
 	}
 	
 	public boolean isEmpty () {

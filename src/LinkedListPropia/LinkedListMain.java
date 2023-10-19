@@ -1,6 +1,6 @@
 package LinkedListPropia;
 
-public class LinkedListPersonal {
+public class LinkedListMain {
 	public static void main(String[] args) {
 		LinkedListPropia l = new LinkedListPropia();
 		l.addAtPosition(78, 0);

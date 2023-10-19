@@ -15,5 +15,9 @@ public class Cliente {
 		Stack1.pop();
 		System.out.println(Stack1.peek());
 		Stack1.printStack();
+		System.out.println();
+		System.out.println("Ahora vaciaremos la pila");
+		Stack1.limpiarPila();
+		Stack1.printStack();
 	}
 }

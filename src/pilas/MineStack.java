@@ -31,6 +31,7 @@ public class MineStack<E> {
 	}
 	
 	public void limpiarPila () {
+		lista.limpiar();
 	}
 	
 	public boolean isEmpty () {
