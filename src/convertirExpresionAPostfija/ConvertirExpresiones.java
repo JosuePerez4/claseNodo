@@ -43,7 +43,7 @@ public class ConvertirExpresiones<E> {
 	    while (!expresiones.isEmpty()) {
 	        postFija += expresiones.pop();
 	    }
-
+	    
 	    return postFija;
 	}
 
@@ -60,5 +60,15 @@ public class ConvertirExpresiones<E> {
 		default:
 			return 0;
 		}
+	}
+	
+	public int separarNum (String str) {
+		String num="";
+		/*for(Character c : str.toCharArray()) {
+			while (!(c == '^' && c == '/' && c == '*' && c == '+' && c == '-')) {
+				num += c;
+			}
+		}*/
+		return Integer.valueOf(num);
 	}
 }
