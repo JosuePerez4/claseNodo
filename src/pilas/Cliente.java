@@ -17,7 +17,7 @@ public class Cliente {
 		Stack1.printStack();
 		System.out.println();
 		System.out.println("Ahora vaciaremos la pila");
-		Stack1.limpiarPila();
+		Stack1.clenaStack();
 		Stack1.printStack();
 	}
 }

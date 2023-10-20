@@ -30,7 +30,11 @@ public class MineStack<E> {
 		return lista.getFirstElement();
 	}
 	
-	public void limpiarPila () {
+	public int size () {
+		return lista.getSize();
+	}
+	
+	public void clenaStack () {
 		lista.limpiar();
 	}
 	
