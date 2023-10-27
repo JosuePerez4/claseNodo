@@ -1,7 +1,7 @@
 package LinkedList;
 
 public class LinkedList<E> {
-	
+
 	private Node<E> head;
 	private int size;
 
@@ -27,44 +27,45 @@ public class LinkedList<E> {
 	}
 
 	public void add(E element) {
-	    Node<E> nuevoNodo = new Node<E>(element);
-	    if (head == null) {
-	        // Si la lista está vacía, el nuevo nodo se convierte en la cabeza
-	        head = nuevoNodo;
-	    } else {
-	        // Si la lista no está vacía, buscamos el último nodo y lo conectamos al nuevo nodo
-	        Node<E> actual = head;
-	        while (actual.getSiguiente() != null) {
-	            actual = actual.getSiguiente();
-	        }
-	        actual.setSiguiente(nuevoNodo);
-	    }
-	    this.size++;
+		Node<E> nuevoNodo = new Node<E>(element);
+		if (head == null) {
+			// Si la lista está vacía, el nuevo nodo se convierte en la cabeza
+			head = nuevoNodo;
+		} else {
+			// Si la lista no está vacía, buscamos el último nodo y lo conectamos al nuevo
+			// nodo
+			Node<E> actual = head;
+			while (actual.getSiguiente() != null) {
+				actual = actual.getSiguiente();
+			}
+			actual.setSiguiente(nuevoNodo);
+		}
+		this.size++;
 	}
-	
+
 	// Añade en la posicicón indicada
 	public void add(E element, int pos) {
 		if (pos < 0) {
-        } else if (pos == 0) {
-            Node <E> j = new Node <E> (element);
-            head = j;
-            size++;
-        } else {
-            Node <E> p = head;
-            int pContador = 0;
-            while (p.getSiguiente() != null && pContador < pos - 1) {
-                pContador++;
-                p = p.getSiguiente();
-            }
-            if (pContador == pos - 1) {
-                Node <E> n = new Node<E>(element);
-                if(p.getSiguiente() != null) {
-                	n.setSiguiente(p.getSiguiente());
-                }
-                p.setSiguiente(n);
-                size++;
-            }
-        }
+		} else if (pos == 0) {
+			Node<E> j = new Node<E>(element);
+			head = j;
+			size++;
+		} else {
+			Node<E> p = head;
+			int pContador = 0;
+			while (p.getSiguiente() != null && pContador < pos - 1) {
+				pContador++;
+				p = p.getSiguiente();
+			}
+			if (pContador == pos - 1) {
+				Node<E> n = new Node<E>(element);
+				if (p.getSiguiente() != null) {
+					n.setSiguiente(p.getSiguiente());
+				}
+				p.setSiguiente(n);
+				size++;
+			}
+		}
 	}
 	
 	// Añade al inicio de la lista
@@ -89,14 +90,15 @@ public class LinkedList<E> {
 
 	public void removeByValue(int valNodo) {
 	}
-	
+
 	// Añadir nodo 2 posiciones después de la indicada
-	public void addDespuesDeDos (E element, int pos) {
-		if(pos < 0) {
-		} else if (pos == 0 && head != null && head.getSiguiente() != null && head.getSiguiente().getSiguiente() != null) {
-				Node <E> x = new Node <E> (element);
-				x.setSiguiente(head.getSiguiente().getSiguiente().getSiguiente());
-				head.getSiguiente().getSiguiente().setSiguiente(x);
+	public void addDespuesDeDos(E element, int pos) {
+		if (pos < 0) {
+		} else if (pos == 0 && head != null && head.getSiguiente() != null
+				&& head.getSiguiente().getSiguiente() != null) {
+			Node<E> x = new Node<E>(element);
+			x.setSiguiente(head.getSiguiente().getSiguiente().getSiguiente());
+			head.getSiguiente().getSiguiente().setSiguiente(x);
 		}
 	}
 
@@ -140,76 +142,85 @@ public class LinkedList<E> {
 			return data;
 		}
 	}
-	
-	public E removeByPositionValue (int index) {
+
+	/**
+	 *
+	 * Descripción: Remueve por la posición y devuelve el dato
+	 * 
+	 * @param index se refiere a la posición en la que quieres remover el dato
+	 * @param
+	 * @return Retorna lo que elimina.
+	 */
+	public E removeByPositionValue(int index) {
 		if (head == null || index < 0 || index >= size) {
-	        System.out.println("Lista vacía o posición equivocada");
-	        return null;
-	    }
-
-	    Node<E> actual = head;
-	    Node<E> anterior = null;
-	    int contador = 0;
-
-	    while (contador < index && actual != null) {
-	        contador++;
-	        anterior = actual;
-	        actual = actual.getSiguiente();
-	    }
-
-	    if (contador == index) {
-	        if (anterior != null) {
-	            anterior.setSiguiente(actual.getSiguiente());
-	        } else {
-	            head = actual.getSiguiente();
-	        }
-	        size--;
-	        return actual.getDatos();
-	    } else {
-	        System.out.println("No se encontró el elemento en la posición especificada");
-	        return null;
-	    }
-	}
-	
-	public void removeByPosition (int index) {
-		if(head == null && index < 0 || size < index) {
 			System.out.println("Lista vacía o posición equivocada");
-			return;
+			return null;
 		}
-		
-		Node <E> actual = head;
-		Node <E> anterior = null;
+
+		Node<E> actual = head;
+		Node<E> anterior = null;
 		int contador = 0;
-		while(contador < index && actual.getSiguiente() != null) {
+
+		while (contador < index && actual != null) {
 			contador++;
 			anterior = actual;
 			actual = actual.getSiguiente();
 		}
-		if(contador == index) {
+
+		if (contador == index) {
+			if (anterior != null) {
+				anterior.setSiguiente(actual.getSiguiente());
+			} else {
+				head = actual.getSiguiente();
+			}
+			size--;
+			return actual.getDatos();
+		} else {
+			System.out.println("No se encontró el elemento en la posición especificada");
+			return null;
+		}
+	}
+
+	// Remueve por la posición
+	public void removeByPosition(int index) {
+		if (head == null && index < 0 || size < index) {
+			System.out.println("Lista vacía o posición equivocada");
+			return;
+		}
+
+		Node<E> actual = head;
+		Node<E> anterior = null;
+		int contador = 0;
+		while (contador < index && actual.getSiguiente() != null) {
+			contador++;
+			anterior = actual;
+			actual = actual.getSiguiente();
+		}
+		if (contador == index) {
 			anterior.setSiguiente(actual.getSiguiente());
 		} else {
 			head = actual.getSiguiente();
 		}
 		size--;
 	}
-	
+
 	public E get(int position) {
-	    if (head == null || position < 0 || position >= size) {
-	        return null; // La lista está vacía o la posición está fuera de rango.
-	    }
+		if (head == null || position < 0 || position >= size) {
+			return null; // La lista está vacía o la posición está fuera de rango.
+		}
 
-	    Node<E> current = head;
-	    int index = 0;
+		Node<E> current = head;
+		int index = 0;
 
-	    while (index < position) {
-	        current = current.getSiguiente();
-	        index++;
-	    }
-	    return current.getDatos();
+		while (index < position) {
+			current = current.getSiguiente();
+			index++;
+		}
+		return current.getDatos();
 	}
 
 	public E getFirstElement() {
-		if(head != null) {
+		if (head != null) {
 			return head.getDatos();
 		} else {
 			return null;
@@ -224,12 +235,12 @@ public class LinkedList<E> {
 		}
 		return nodoFinal.getDatos();
 	}
-	
-	public void limpiar () {
+
+	public void limpiar() {
 		head = null;
 	}
-	
-	public boolean isEmpty () {
+
+	public boolean isEmpty() {
 		return head == null;
 	}
 
@@ -254,15 +265,15 @@ public class LinkedList<E> {
 
 	private void printReverseRecursive(Node<E> node) {
 		if (node == null) {
-	        return;
-	    }
-	    
-	    System.out.print("[" + node.getDatos() + "]");
-	    
-	    if (node.getSiguiente() != null) {
-	        System.out.print("->"); 
-	    }
-	    
-	    printReverseRecursive(node.getSiguiente());
+			return;
+		}
+
+		System.out.print("[" + node.getDatos() + "]");
+
+		if (node.getSiguiente() != null) {
+			System.out.print("->");
+		}
+
+		printReverseRecursive(node.getSiguiente());
 	}
 }
