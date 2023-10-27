@@ -2,9 +2,9 @@ package previosPasados;
 
 public class Negocio {
 
-	public static void main(String[] args) {
+	public static <E> void main(String[] args) {
 
-		Carrusel carrusel = new Carrusel();
+		Carrusel <E> carrusel = new Carrusel <E> ();
 		// Creamos muchos vagones aleatorios
 		for(int i=0; i<10;i++) {
 			carrusel.crearVagon();

@@ -46,26 +46,25 @@ public class recursividadEjercicios {
         return nPotencia(n - 1) * 2;
     }
 
-    public double tamañoCarpetaRecursivo(File ruta) {
+    // Calcula el tamaño en bytes de la ruta en el pc que le pasamos
+    public long tamañoCarpetaRecursivo(File ruta) {
         long tamaño = 0;
-        if (!ruta.isDirectory()) {
-            System.out.println("Analizando directorio: " + ruta.getAbsolutePath());
+        if (ruta.isDirectory()) {
             File[] archivos = ruta.listFiles();
             if (archivos != null) {
                 for (File archivo : archivos) {
                     if (archivo.canRead() && archivo.isDirectory()) {
-                        System.out.println("Recursión en subdirectorio: " + archivo.getAbsolutePath());
                         tamaño += tamañoCarpetaRecursivo(archivo);
                     } else {
                         tamaño += archivo.length();
-                        System.out.println("Tamaño del archivo: " + archivo.length() + " bytes");
                     }
                 }
             }
         }
-        double gigabytes = tamaño / (1024.0 * 1024.0 * 1024.0);
-        return gigabytes;
+        return tamaño;
     }
+
+    // Ejercicios día 27/10/2023
 
     public void imprimirVocales(String palabra, int pos) {
         if (pos >= palabra.length()) {
@@ -84,22 +83,29 @@ public class recursividadEjercicios {
             return 0;
         }
         return contarCoincidenciasRecursivo(texto, letra, 0, 0);
-
     }
 
     private int contarCoincidenciasRecursivo(String texto, char letra, int pos, int contador) {
         if (pos >= texto.length()) {
             return contador;
         }
-        if(texto.charAt(pos) == letra){
+        if (texto.charAt(pos) == letra) {
             return contarCoincidenciasRecursivo(texto, letra, pos + 1, contador + 1);
         }
-        return contarCoincidenciasRecursivo(texto, letra, pos+1, contador);
+        return contarCoincidenciasRecursivo(texto, letra, pos + 1, contador);
     }
 
-    public boolean identificarNumeroBinario (int numero) {
+    public boolean identificarNumeroBinario(int numero) {
+        return identificarNumeroBinarioRecursivo(String.valueOf(numero), 0);
+    }
+
+    private boolean identificarNumeroBinarioRecursivo(String numero, int pos) {
+        if (pos >= numero.length()) {
+            return true;
+        }
+        if ("01".indexOf(numero.charAt(pos)) != -1) {
+            return identificarNumeroBinarioRecursivo(String.valueOf(numero), pos + 1);
+        }
         return false;
     }
 }
-
-
