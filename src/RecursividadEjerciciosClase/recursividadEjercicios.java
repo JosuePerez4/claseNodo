@@ -2,7 +2,9 @@ package RecursividadEjerciciosClase;
 
 import java.io.File;
 
-public class recursividadEjercicios {
+import pilas.MineStack;
+
+public class recursividadEjercicios<E> {
 
     public recursividadEjercicios() {
 
@@ -107,5 +109,61 @@ public class recursividadEjercicios {
             return identificarNumeroBinarioRecursivo(String.valueOf(numero), pos + 1);
         }
         return false;
+    }
+
+    // Fin ejercicios 27/10/2023
+
+    public static void mostrarArrayRecursivo(int[] array, int indice) {
+        if (indice < array.length) {
+            System.out.println(array[indice]);
+            mostrarArrayRecursivo(array, indice + 1);
+        }
+    }
+
+    public static int posicionElementoRecursivo(int[] array, int elementoBuscar, int indice) {
+        if (indice < array.length) {
+            if (array[indice] == elementoBuscar) {
+                return indice;
+            } else {
+                return posicionElementoRecursivo(array, elementoBuscar, indice + 1);
+            }
+        }
+        return -1;
+    }
+
+    public int sumaVector(int[] array, int indice) {
+        if (indice < array.length) {
+            return array[indice] + sumaVector(array, indice + 1);
+        } else {
+            return 0;
+        }
+    }
+
+    public int sumaDigitosNumero(int numero) {
+        if (numero % 10 > 0) {
+            return sumaDigitosNumero(numero / 10) + numero % 10;
+        } else {
+            return 0;
+        }
+    }
+
+    public boolean stringBalanceado(String parentesis) {
+        MineStack<Character> balance = new MineStack<Character>();
+        return stringBalanceadoRecursivo(parentesis, 0, balance);
+    }
+
+    private boolean stringBalanceadoRecursivo (String parentesis, int index, MineStack <Character> balance) {
+        if (index >= parentesis.length()) {
+            return balance.isEmpty();
+        }
+        Character c = parentesis.charAt(index);
+        if (c == '(') {
+            balance.push(c);
+        } else if (c == ')' && !balance.isEmpty()) {
+            balance.pop();
+        } else if (c == ')' && balance.isEmpty()) {
+            return false;
+        }
+        return stringBalanceadoRecursivo(parentesis, index + 1, balance);
     }
 }
