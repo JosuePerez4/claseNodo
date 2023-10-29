@@ -21,6 +21,10 @@ public class Cola <E> {
 	public void crear () {
 		this.cola = new LinkedList<E>();
 	}
+
+	public E get (int index) {
+		return cola.get(index);
+	}
 	
 	public void encolar (E element) {
 		cola.addFirst(element);
