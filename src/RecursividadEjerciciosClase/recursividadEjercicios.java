@@ -166,4 +166,17 @@ public class recursividadEjercicios<E> {
         }
         return stringBalanceadoRecursivo(parentesis, index + 1, balance);
     }
+
+public boolean compararColas(Cola cola1, Cola cola2){
+return compararColasRecursivo(cola1, cola2, 0);
+}
+
+private boolean compararColasRecursivo(Cola cola1, Cola cola2, int indice){
+if(indice > cola1.size() || indice > cola2.size()){
+return false;
+} if(cola1.primero() == cola2.primero()){
+return compararColasRecursivo(cola1, cola2, indice+1);
+}
+return compararColasRecursivo(cola1, cola2, indice);
+}
 }
