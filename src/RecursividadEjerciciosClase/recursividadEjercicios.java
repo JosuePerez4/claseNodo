@@ -2,6 +2,7 @@ package RecursividadEjerciciosClase;
 
 import java.io.File;
 
+import colas.Cola;
 import pilas.MineStack;
 
 public class recursividadEjercicios<E> {
@@ -152,7 +153,7 @@ public class recursividadEjercicios<E> {
         return stringBalanceadoRecursivo(parentesis, 0, balance);
     }
 
-    private boolean stringBalanceadoRecursivo (String parentesis, int index, MineStack <Character> balance) {
+    private boolean stringBalanceadoRecursivo(String parentesis, int index, MineStack<Character> balance) {
         if (index >= parentesis.length()) {
             return balance.isEmpty();
         }
@@ -167,16 +168,20 @@ public class recursividadEjercicios<E> {
         return stringBalanceadoRecursivo(parentesis, index + 1, balance);
     }
 
-public boolean compararColas(Cola cola1, Cola cola2){
-return compararColasRecursivo(cola1, cola2, 0);
-}
+    public boolean compararColas(Cola <Integer> cola1, Cola <Integer> cola2) {
+        if (cola1.size() != cola2.size()) {
+            return false; // Las colas tienen diferentes tamaños, no pueden ser iguales.
+        }
+        return compararColasRecursivo(cola1, cola2, 0);
+    }
 
-private boolean compararColasRecursivo(Cola cola1, Cola cola2, int indice){
-if(indice > cola1.size() || indice > cola2.size()){
-return false;
-} if(cola1.primero() == cola2.primero()){
-return compararColasRecursivo(cola1, cola2, indice+1);
-}
-return compararColasRecursivo(cola1, cola2, indice);
-}
+    private boolean compararColasRecursivo(Cola <Integer> cola1, Cola <Integer> cola2, int indice) {
+        if (indice == cola1.size()) {
+            return true; // Se han comparado todos los elementos y son iguales.
+        }
+        if (cola1.get(indice) == cola2.get(indice)) {
+            return compararColasRecursivo(cola1, cola2, indice + 1);
+        }
+        return false; // Los elementos en el índice actual no son iguales.
+    }
 }
