@@ -112,6 +112,23 @@ public class recursividadEjercicios<E> {
         return false;
     }
 
+    public boolean compararColas(Cola <Integer> cola1, Cola <Integer> cola2) {
+        if (cola1.size() != cola2.size()) {
+            return false; // Las colas tienen diferentes tamaños, no pueden ser iguales.
+        }
+        return compararColasRecursivo(cola1, cola2, 0);
+    }
+
+    private boolean compararColasRecursivo(Cola <Integer> cola1, Cola <Integer> cola2, int indice) {
+        if (indice == cola1.size()) {
+            return true; // Se han comparado todos los elementos y son iguales.
+        }
+        if (cola1.get(indice) == cola2.get(indice)) {
+            return compararColasRecursivo(cola1, cola2, indice + 1);
+        }
+        return false; // Los elementos en el índice actual no son iguales.
+    }
+
     // Fin ejercicios 27/10/2023
 
     public static void mostrarArrayRecursivo(int[] array, int indice) {
@@ -166,22 +183,5 @@ public class recursividadEjercicios<E> {
             return false;
         }
         return stringBalanceadoRecursivo(parentesis, index + 1, balance);
-    }
-
-    public boolean compararColas(Cola <Integer> cola1, Cola <Integer> cola2) {
-        if (cola1.size() != cola2.size()) {
-            return false; // Las colas tienen diferentes tamaños, no pueden ser iguales.
-        }
-        return compararColasRecursivo(cola1, cola2, 0);
-    }
-
-    private boolean compararColasRecursivo(Cola <Integer> cola1, Cola <Integer> cola2, int indice) {
-        if (indice == cola1.size()) {
-            return true; // Se han comparado todos los elementos y son iguales.
-        }
-        if (cola1.get(indice) == cola2.get(indice)) {
-            return compararColasRecursivo(cola1, cola2, indice + 1);
-        }
-        return false; // Los elementos en el índice actual no son iguales.
     }
 }
