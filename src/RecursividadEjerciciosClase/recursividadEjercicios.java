@@ -112,14 +112,14 @@ public class recursividadEjercicios<E> {
         return false;
     }
 
-    public boolean compararColas(Cola <Integer> cola1, Cola <Integer> cola2) {
+    public boolean compararColas(Cola<Integer> cola1, Cola<Integer> cola2) {
         if (cola1.size() != cola2.size()) {
             return false; // Las colas tienen diferentes tamaños, no pueden ser iguales.
         }
         return compararColasRecursivo(cola1, cola2, 0);
     }
 
-    private boolean compararColasRecursivo(Cola <Integer> cola1, Cola <Integer> cola2, int indice) {
+    private boolean compararColasRecursivo(Cola<Integer> cola1, Cola<Integer> cola2, int indice) {
         if (indice == cola1.size()) {
             return true; // Se han comparado todos los elementos y son iguales.
         }
@@ -131,6 +131,7 @@ public class recursividadEjercicios<E> {
 
     // Fin ejercicios 27/10/2023
 
+    // Ejercicios diapositivas (m sirven de estudio y adelantando :D)
     public static void mostrarArrayRecursivo(int[] array, int indice) {
         if (indice < array.length) {
             System.out.println(array[indice]);
@@ -183,5 +184,72 @@ public class recursividadEjercicios<E> {
             return false;
         }
         return stringBalanceadoRecursivo(parentesis, index + 1, balance);
+    }
+
+    public boolean palabraOrdenada(String palabra) {
+        palabra = palabra.toLowerCase();
+        return palabraOrdenadaRecursivo(palabra, 0);
+    }
+
+    private boolean palabraOrdenadaRecursivo(String palabra, int index) {
+        if (index == palabra.length() - 1) {
+            return true;
+        }
+        char actual = palabra.charAt(index);
+        char siguiente = palabra.charAt(index + 1);
+        if (actual > siguiente) {
+            return false;
+        }
+        return palabraOrdenadaRecursivo(palabra, index + 1);
+    }
+
+    public boolean numOrdenadoDecreciente(String num) {
+        return numOrdenadoDecrecienteRecursivo(num, 0);
+    }
+
+    private boolean numOrdenadoDecrecienteRecursivo(String num, int index) {
+        if (index == num.length() - 1) {
+            return true;
+        }
+        char actual = num.charAt(index);
+        char siguiente = num.charAt(index + 1);
+        if (actual > siguiente) {
+            return numOrdenadoDecrecienteRecursivo(num, index + 1);
+        }
+        return false;
+    }
+
+    public boolean numOrdenadoCreciente(String num) {
+        return numOrdenadoCrecienteRecursivo(num, 0);
+    }
+
+    private boolean numOrdenadoCrecienteRecursivo(String num, int index) {
+        if (index == num.length() - 1) {
+            return true;
+        }
+        char actual = num.charAt(index);
+        char siguiente = num.charAt(index + 1);
+        if (actual < siguiente) {
+            return numOrdenadoCrecienteRecursivo(num, index + 1);
+        }
+        return false;
+    }
+
+    public boolean numSimetrico(String num) {
+        return numSimetricoRecursivo(num, 0);
+    }
+
+    private boolean numSimetricoRecursivo(String num, int index) {
+        if (index >= num.length() / 2) {
+            return true;
+        }
+        char primerDigito = num.charAt(index);
+        char ultimoDigito = num.charAt(num.length() - index - 1);
+
+        if (primerDigito != ultimoDigito) {
+            return false; // Los dígitos no son iguales, no es simétrico.
+        }
+
+        return numSimetricoRecursivo(num, index + 1);
     }
 }
