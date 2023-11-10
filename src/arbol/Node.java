@@ -1,6 +1,6 @@
 package arbol;
 
-public class Node <E> implements Comparable <Node>{
+public class Node <E> implements Comparable <Node <E>>{
     private E data;
     private Node<E> derecha, izquierda;
 
@@ -42,7 +42,12 @@ public class Node <E> implements Comparable <Node>{
     }
 
     @Override
-    public int compareTo(Node otroNodo) {
+    public String toString() {
+        return "Node: data=" + getData() + ", derecha=" + getDerecha() + ", izquierda=" + getIzquierda();
+    }
+
+    @Override
+    public int compareTo(Node <E> otroNodo) {
         if((Integer) this.data > (Integer) otroNodo.getData()){
             return 1;
         } else if ((Integer) this.data < (Integer) otroNodo.getData()){
@@ -50,10 +55,5 @@ public class Node <E> implements Comparable <Node>{
         } else {
             return 0;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Node: data=" + getData() + ", derecha=" + getDerecha() + ", izquierda=" + getIzquierda();
     }
 }
