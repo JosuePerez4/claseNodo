@@ -9,9 +9,9 @@ public class Main {
         Node <Integer> n4 = ab.agregarNodo(9);
         Node <Integer> n5 = ab.agregarNodo(3);
         Node <Integer> n6 = ab.agregarNodo(1);
-        System.out.println("Nodo eliminado: " + ab.eliminar(2));
+        System.out.println("Nodo encontrado: " + ab.buscarNodo(3));
         //System.out.println(ab.pertenece(7));
-        ab.imprimir(n1);
+        System.out.println("Pre orden: " + ab.imprimirPreOrden(n1));
         //System.out.println(ab.obtenerRaiz());
     }
 }

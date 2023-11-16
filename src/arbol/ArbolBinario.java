@@ -71,29 +71,31 @@ public class ArbolBinario<E> {
         return nodo.getDerecha();
     }
 
-    public E eliminar(E dato) {
-        Node<E> t = new Node<E>(dato);
-        if (raiz != null && raiz.compareTo(t) == 0) {
-            E eliminado = raiz.getData();
-            raiz = null;
-            return eliminado;
+    public boolean buscarNodo(E dato) {
+        if (raiz == null) {
+            return false;
         }
-        return eliminarRecursivo(raiz, dato);
+        return buscarNodoRecursivo(raiz, dato);
     }
 
-    public E eliminarRecursivo(Node<E> nodoActual, E dato) {
-        if (raiz == null) {
-            return null;
-        } else if (nodoActual.getDerecha() != null && nodoActual.getDerecha().compareTo(new Node <E> (dato)) == 0) {
-            E eliminado = nodoActual.getDerecha().getData();
-            nodoActual.setDerecha(null);
-            return eliminado;
-        } else if (nodoActual.getIzquierda() != null && nodoActual.getIzquierda().compareTo(new Node <E> (dato)) == 0) {
-            E eliminado = nodoActual.getIzquierda().getData();
-            nodoActual.setIzquierda(null);
-            return eliminado;
+    private boolean buscarNodoRecursivo(Node<E> nodoActual, E dato) {
+        if (nodoActual == null) {
+            return false;
         }
-        return eliminarRecursivo(nodoActual, dato);
+
+        if (nodoActual.getData().equals(dato)) {
+            return true;
+        }
+
+        if (buscarNodoRecursivo(nodoActual.getIzquierda(), dato)) {
+            return true;
+        }
+
+        return buscarNodoRecursivo(nodoActual.getDerecha(), dato);
+    }
+
+    public E eliminar(E dato) {
+        return dato;
     }
 
     public boolean pertenece(E dato) {
@@ -108,7 +110,7 @@ public class ArbolBinario<E> {
         if (nodoActual != null) {
             if (nodoActual.compareTo(n) == 0) {
                 return true;
-            } else if (nodoActual.getDerecha() != null && nodoActual.getDerecha().compareTo(n) == 0) {
+            } else if (nodoActual.getDerecha() != null && nodoActual.getDerecha().getData().equals(0)) {
                 return true;
             } else {
                 if (nodoActual.getIzquierda() != null) {
@@ -119,12 +121,18 @@ public class ArbolBinario<E> {
         return false;
     }
 
-    public void imprimir(Node<E> n) {
-        if (n != null) {
-            System.out.println(n.getData());
-            imprimir(n.getDerecha());
-            imprimir(n.getIzquierda());
+    public String imprimirPreOrden(Node<E> n) {
+        if (n == null) {
+            return "";
         }
+        return n.getData() + ", " + imprimirPreOrden(n.getIzquierda()) + imprimirPreOrden(n.getDerecha());
+    }
+
+    public String imprimirOrden(Node<E> n) {
+        if (n == null) {
+            return "";
+        }
+        return imprimirOrden(n.getIzquierda()) + n.getData() + ", " + imprimirOrden(n.getDerecha());
     }
 
     public void imprimirConIndicativo(Node<E> nodo) {
