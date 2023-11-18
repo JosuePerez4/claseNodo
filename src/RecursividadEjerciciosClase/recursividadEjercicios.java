@@ -249,7 +249,24 @@ public class recursividadEjercicios<E> {
         if (primerDigito != ultimoDigito) {
             return false; // Los dígitos no son iguales, no es simétrico.
         }
-
         return numSimetricoRecursivo(num, index + 1);
+    }
+
+    // Método para contar los números mayores al ingresado
+    // Método de estudio (fue d un parcial anterior)
+
+    public int contarNumerosMayores(int[] arreglo, int numero) {
+        return contarNumerosMayoresRecursivo(arreglo, numero, 0);
+    }
+
+    private int contarNumerosMayoresRecursivo(int[] arreglo, int numero, int indice) {
+        if (indice == arreglo.length) {
+            return 0;
+        }
+
+        if (arreglo[indice] > numero) {
+            return 1 + contarNumerosMayoresRecursivo(arreglo, numero, indice + 1);
+        }
+        return contarNumerosMayoresRecursivo(arreglo, numero, indice + 1);
     }
 }
