@@ -1,5 +1,7 @@
 package arbol;
 
+import pilas.MineStack;
+
 public class ArbolBinario<E> {
 
     private Node<E> raiz;
@@ -59,8 +61,8 @@ public class ArbolBinario<E> {
         return raiz == null;
     }
 
-    public Node<E> obtenerRaiz() {
-        return raiz;
+    public E obtenerRaiz() {
+        return raiz.getData();
     }
 
     public Node<E> obtenerIzquierda(Node<E> nodo) {
@@ -95,7 +97,58 @@ public class ArbolBinario<E> {
     }
 
     public E eliminar(E dato) {
-        return dato;
+        return eliminarRecursivo(raiz, dato).getData();
+    }
+
+    private Node<E> eliminarRecursivo(Node<E> nodoActual, E valor) {
+        if (nodoActual == null) {
+            // El nodo no existe en el árbol
+            return null;
+        }
+        // Identificar el movimiento de nuestras ramas
+
+        // Si el valor a eliminar es menor al nodo actual (Rama izquierda)
+        if (nodoActual.compareTo(new Node<E>(valor)) > 0) {
+            // Usando el set y la llamada recursiva con el get de acuerdo a la posicion de
+            // la rama
+            // garantizamos que se este moviendo correctamente
+            nodoActual.setIzquierda(eliminarRecursivo(nodoActual.getIzquierda(), valor));
+        } // Si el valor a eliminar es mayor al nodo (Rama derecha)
+        else if (nodoActual.compareTo(new Node<E>(valor)) < 0) {
+            nodoActual.setDerecha(eliminarRecursivo(nodoActual.getDerecha(), valor));
+        } // Una vez que se ha encontrado el nodo, comienza la evaluación de los casos
+        else {
+
+            // Caso 1: Sin hijo izquierdo o sin hijos
+            if (nodoActual.getIzquierda() == null) {
+
+                return nodoActual.getDerecha();
+
+            } // Caso 2: Sin hijo derecho
+            else if (nodoActual.getDerecha() == null) {
+
+                return nodoActual.getIzquierda();
+
+            } // Caso 3: Dos hijos, encontrar sucesor inmediato
+            else {
+
+                nodoActual.setData(valorMinimo(nodoActual.getDerecha()));
+                // Eliminar el sucesor inmediato en el subárbol derecho
+                nodoActual.setDerecha(eliminarRecursivo(nodoActual.getDerecha(), nodoActual.getData()));
+            }
+        }
+
+        return nodoActual;
+    }
+
+    // Encontrar el valor más pequeño en el subárbol
+    private E valorMinimo(Node<E> nodo) {
+        E min = nodo.getData();
+        while (nodo.getIzquierda() != null) {
+            min = nodo.getIzquierda().getData();
+            nodo = nodo.getIzquierda();
+        }
+        return min;
     }
 
     public boolean pertenece(E dato) {
@@ -110,12 +163,9 @@ public class ArbolBinario<E> {
         if (nodoActual != null) {
             if (nodoActual.compareTo(n) == 0) {
                 return true;
-            } else if (nodoActual.getDerecha() != null && nodoActual.getDerecha().getData().equals(0)) {
-                return true;
             } else {
-                if (nodoActual.getIzquierda() != null) {
-                    return perteneceRecursivo(nodoActual.getIzquierda(), dato);
-                }
+                return perteneceRecursivo(nodoActual.getIzquierda(), dato) ||
+                        perteneceRecursivo(nodoActual.getDerecha(), dato);
             }
         }
         return false;
@@ -125,14 +175,21 @@ public class ArbolBinario<E> {
         if (n == null) {
             return "";
         }
-        return n.getData() + ", " + imprimirPreOrden(n.getIzquierda()) + imprimirPreOrden(n.getDerecha());
+        return n.getData() + " " + imprimirPreOrden(n.getIzquierda()) + imprimirPreOrden(n.getDerecha());
     }
 
     public String imprimirOrden(Node<E> n) {
         if (n == null) {
             return "";
         }
-        return imprimirOrden(n.getIzquierda()) + n.getData() + ", " + imprimirOrden(n.getDerecha());
+        return imprimirOrden(n.getIzquierda()) + n.getData() + " " + imprimirOrden(n.getDerecha());
+    }
+
+    public String imprimirPostOrden(Node<E> n) {
+        if (n == null) {
+            return "";
+        }
+        return imprimirPostOrden(n.getIzquierda()) + imprimirPostOrden(n.getDerecha()) + " " + n.getData();
     }
 
     public void imprimirConIndicativo(Node<E> nodo) {

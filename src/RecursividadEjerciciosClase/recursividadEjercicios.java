@@ -263,7 +263,7 @@ public class recursividadEjercicios<E> {
         if (indice == arreglo.length) {
             return 0;
         }
-
+        
         if (arreglo[indice] > numero) {
             return 1 + contarNumerosMayoresRecursivo(arreglo, numero, indice + 1);
         }

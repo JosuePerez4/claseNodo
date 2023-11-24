@@ -22,48 +22,49 @@ public class ConvertirExpresiones<E> {
 		String postFija = "";
 		String num = "";
 		boolean uniendoNumero = false;
-		
+
 		for (char c : expresionNormal.toCharArray()) {
-	        if (Character.isLetterOrDigit(c)) {
-	            num += c;
-	            uniendoNumero = true;
-	        } else { 
-	            if (uniendoNumero) {
-	                postFija += num + " ";
-	                num = ""; // Reiniciar el número
-	                uniendoNumero = false;
-	            }
-	            
-	            if (c == '(') {
-	                expresiones.push(c);
-	            } else if (c == ')') {
-	                while (!expresiones.isEmpty() && expresiones.peek() != '(') {
-	                    postFija += expresiones.pop() + " ";
-	                }
-	                if (!expresiones.isEmpty() && expresiones.peek() == '(') {
-	                    expresiones.pop();
-	                }
-	            } else {
-	                while (!expresiones.isEmpty() && determinarImportancia(c) <= determinarImportancia(expresiones.peek())) {
-	                    postFija += expresiones.pop() + " ";
-	                }
-	                expresiones.push(c);
-	            }
-	        }
-	    }
+			if (Character.isLetterOrDigit(c)) {
+				num += c;
+				uniendoNumero = true;
+			} else {
+				if (uniendoNumero) {
+					postFija += num + " ";
+					num = ""; // Reiniciar el número
+					uniendoNumero = false;
+				}
 
-	    // Agregar el último número si lo hay
-	    if (uniendoNumero) {
-	        postFija += num + " ";
-	    }
+				if (c == '(') {
+					expresiones.push(c);
+				} else if (c == ')') {
+					while (!expresiones.isEmpty() && expresiones.peek() != '(') {
+						postFija += expresiones.pop() + " ";
+					}
+					if (!expresiones.isEmpty() && expresiones.peek() == '(') {
+						expresiones.pop();
+					}
+				} else {
+					while (!expresiones.isEmpty()
+							&& determinarImportancia(c) <= determinarImportancia(expresiones.peek())) {
+						postFija += expresiones.pop() + " ";
+					}
+					expresiones.push(c);
+				}
+			}
+		}
 
-	    while (!expresiones.isEmpty()) {
-	        postFija += expresiones.pop() + " ";
-	    }
+		// Agregar el último número si lo hay
+		if (uniendoNumero) {
+			postFija += num + " ";
+		}
 
-	    return postFija;
+		while (!expresiones.isEmpty()) {
+			postFija += expresiones.pop() + " ";
+		}
+
+		return postFija;
 	}
-	
+
 	public float resolverPostfija(String postfija) {
 		MineStack<Float> operando = new MineStack<Float>();
 		String[] tokens = postfija.split(" ");
@@ -82,36 +83,36 @@ public class ConvertirExpresiones<E> {
 	// Se usa en el método resolverPostfija
 	private float operar(char operador, float a, float b) {
 		switch (operador) {
-		case '^':
-			return (float) Math.pow(a, b);
-		case '*':
-			return a * b;
-		case '/':
-			if (b == 0)
-				return 0.1f;
-			return a / b;
-		case '+':
-			return a + b;
-		case '-':
-			return a - b;
-		default:
-			return 0.0f;
+			case '^':
+				return (float) Math.pow(a, b);
+			case '*':
+				return a * b;
+			case '/':
+				if (b == 0)
+					return 0.1f;
+				return a / b;
+			case '+':
+				return a + b;
+			case '-':
+				return a - b;
+			default:
+				return 0.0f;
 		}
 	}
-	
+
 	// Se usa en el método convertirAPostfija
 	private int determinarImportancia(Character c) {
 		switch (c) {
-		case '+':
-		case '-':
-			return 1;
-		case '*':
-		case '/':
-			return 2;
-		case '^':
-			return 3;
-		default:
-			return 0;
+			case '+':
+			case '-':
+				return 1;
+			case '*':
+			case '/':
+				return 2;
+			case '^':
+				return 3;
+			default:
+				return 0;
 		}
 	}
 }
