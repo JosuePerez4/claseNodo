@@ -10,11 +10,14 @@ public class LinkedListMain {
 		l.add(4);
 		System.out.println("primera impresión d la pila");
 		l.print();
+		System.out.println("Impresión reversa: ");
+		l.printReverse();
+		System.out.println("");
 		l.addDespuesDeDos(8, 0);
 		System.out.println();
 		System.out.println("segunda impresión d la pila");
 		l.print();
-		l.limpiar();
+		//l.limpiar();
 		System.out.println();
 		System.out.println("Impresión de limpiar la cola");
 		l.print();

@@ -236,6 +236,18 @@ public class LinkedList<E> {
 		return nodoFinal.getDatos();
 	}
 
+	public void ordenarAscendente () {
+		Node <E> actual = head;
+		Node <E> siguiente = actual.getSiguiente();
+
+		while(siguiente != null){
+			if(actual.compareTo(actual.getSiguiente()) == -1){
+				actual.setSiguiente(siguiente.getSiguiente());
+				siguiente.setSiguiente(actual);
+			}
+			actual = actual.getSiguiente();
+		}
+	}
 	public void limpiar() {
 		head = null;
 	}
@@ -268,11 +280,7 @@ public class LinkedList<E> {
 			return;
 		}
 
-		System.out.print("[" + node.getDatos() + "]");
-
-		if (node.getSiguiente() != null) {
-			System.out.print("->");
-		}
+		System.out.print(node.getDatos());
 
 		printReverseRecursive(node.getSiguiente());
 	}
