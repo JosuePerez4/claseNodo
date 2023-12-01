@@ -67,7 +67,7 @@ public class LinkedList<E> {
 			}
 		}
 	}
-	
+
 	// Añade al inicio de la lista
 	public void addFirst(E element) {
 		Node<E> nuevoNodo = new Node<E>(element);
@@ -236,18 +236,86 @@ public class LinkedList<E> {
 		return nodoFinal.getDatos();
 	}
 
-	public void ordenarAscendente () {
-		Node <E> actual = head;
-		Node <E> siguiente = actual.getSiguiente();
+	public void ordenarAscendente() {
+		boolean intercambiado = true;
 
-		while(siguiente != null){
-			if(actual.compareTo(actual.getSiguiente()) == -1){
-				actual.setSiguiente(siguiente.getSiguiente());
-				siguiente.setSiguiente(actual);
+		while (intercambiado) {
+			intercambiado = false;
+			Node<E> actual = head;
+			Node<E> siguiente = actual.getSiguiente();
+			Node<E> previo = null;
+
+			while (siguiente != null) {
+				if (actual.compareTo(siguiente) > 0) {
+					if (previo != null) {
+						previo.setSiguiente(siguiente);
+					} else {
+						head = siguiente;
+					}
+					actual.setSiguiente(siguiente.getSiguiente());
+					siguiente.setSiguiente(actual);
+					intercambiado = true;
+				}
+
+				previo = actual;
+				actual = actual.getSiguiente();
+				if (actual != null) {
+					siguiente = actual.getSiguiente();
+				} else {
+					siguiente = null;
+				}
 			}
-			actual = actual.getSiguiente();
 		}
 	}
+
+	public void ordenarDescendiente() {
+		boolean intercambiado = true;
+
+		while (intercambiado) {
+			intercambiado = false;
+			Node<E> actual = head;
+			Node<E> siguiente = actual.getSiguiente();
+			Node<E> previo = null;
+
+			while (siguiente != null) {
+				if (actual.compareTo(siguiente) < 0) {
+					if (previo != null) {
+						previo.setSiguiente(siguiente);
+					} else {
+						head = siguiente;
+					}
+					actual.setSiguiente(siguiente.getSiguiente());
+					siguiente.setSiguiente(actual);
+					intercambiado = true;
+				}
+
+				previo = actual;
+				actual = actual.getSiguiente();
+				if (actual != null) {
+					siguiente = actual.getSiguiente();
+				} else {
+					siguiente = null;
+				}
+			}
+		}
+	}
+
+	public int busquedaBinaria(LinkedList<E> lista, int valor) {
+		int inicio = 0;
+		int fin = lista.getSize() - 1;
+		while (inicio <= fin) {
+			int pos = (int) Math.floor((inicio + fin) / 2);
+			if ((int) lista.get(pos) == valor) {
+				return pos;
+			} else if ((int) lista.get(pos) < valor) {
+				inicio = pos + 1;
+			} else {
+				fin = pos - 1;
+			}
+		}
+		return -1;
+	}
+
 	public void limpiar() {
 		head = null;
 	}
@@ -265,7 +333,7 @@ public class LinkedList<E> {
 
 		Node<E> actual = this.head;
 		while (actual.getSiguiente() != null) {
-			System.out.print("[" + actual.getDatos() + "]" + "-> \n");
+			System.out.print("[" + actual.getDatos() + "]" + "->");
 			actual = actual.getSiguiente();
 		}
 		System.out.print("[" + actual.getDatos() + "]");
@@ -285,3 +353,4 @@ public class LinkedList<E> {
 		printReverseRecursive(node.getSiguiente());
 	}
 }
+// lol
